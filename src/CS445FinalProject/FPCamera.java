@@ -1,3 +1,11 @@
+/* File: FPCamera.java
+*  Authors: Mark Erickson, Kevin Kuhlman, Karen Cheung
+*  Class: CS 445 Computer Graphics
+*  Assignment: Final Project Checkpoint 1
+*  Date Last Modified: 5/3/2016
+*  Purpose: This program creates a 3D cube with 6 different colored faces.
+*/
+
 package CS445FinalProject;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -6,6 +14,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.Sys;
+import org.lwjgl.opengl.GL11;
 
 public class FPCamera {
 
@@ -25,10 +34,14 @@ public class FPCamera {
         lPosition.z = 0f;
     }
 
+    // Method: yaw
+    // Purpose: This method changes the yaw of the camera based on mouse input.
     public void yaw(float amount) {
         yaw += amount;
     }
 
+    // Method: pitch
+    // Purpose: This method changes the pitch of the camera based on mouse input.
     public void pitch(float amount) {
         pitch -= amount;
     }
@@ -43,7 +56,7 @@ public class FPCamera {
     }
 
     // Method: walkBackwards
-    // Purpose:
+    // Purpose: This method moves the camera backwards.
     public void walkBackwards(float distance) {
         float xOffset = distance * (float) Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float) Math.cos(Math.toRadians(yaw));
@@ -51,6 +64,8 @@ public class FPCamera {
         position.z -= zOffset;
     }
 
+    // Method: strafeLeft
+    // Purpose: This method moves the camera to the left.
     public void strafeLeft(float distance) {
         float xOffset = distance * (float) Math.sin(Math.toRadians(yaw - 90));
         float zOffset = distance * (float) Math.cos(Math.toRadians(yaw - 90));
@@ -58,6 +73,8 @@ public class FPCamera {
         position.z += zOffset;
     }
 
+    // Method: strafeRight
+    // Purpose: This method moves the camera to the right.
     public void strafeRight(float distance) {
         float xOffset = distance * (float) Math.sin(Math.toRadians(yaw + 90));
         float zOffset = distance * (float) Math.cos(Math.toRadians(yaw + 90));
@@ -65,10 +82,14 @@ public class FPCamera {
         position.z += zOffset;
     }
 
+    // Method: moveUp
+    // Purpose: This method moves the camera up.
     public void moveUp(float distance) {
         position.y -= distance;
     }
 
+    // Method: moveDown
+    // Purpose: This method moves the camera down.
     public void moveDown(float distance) {
         position.y += distance;
     }
@@ -81,6 +102,8 @@ public class FPCamera {
         glTranslatef(position.x, position.y, position.z);
     }
     
+    // Method: gameLoop
+    // Purpose: This method contains the controls for the camera and calls the render method.
     public void gameLoop(){
         FPCamera camera = new FPCamera(0,0,0);
         float dx = 0.0f;
@@ -98,16 +121,16 @@ public class FPCamera {
             dy = Mouse.getDY();
             camera.yaw(dx * mouseSensitivity);
             camera.pitch(dy * mouseSensitivity);
-            if (Keyboard.isKeyDown(Keyboard.KEY_W)){
+            if (Keyboard.isKeyDown(Keyboard.KEY_W) || Keyboard.isKeyDown(Keyboard.KEY_UP)){
                 camera.walkForward(movementSpeed);
             }
-            if (Keyboard.isKeyDown(Keyboard.KEY_S)){
+            if (Keyboard.isKeyDown(Keyboard.KEY_S) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
                 camera.walkBackwards(movementSpeed);
             }
-            if (Keyboard.isKeyDown(Keyboard.KEY_A)){
+            if (Keyboard.isKeyDown(Keyboard.KEY_A) || Keyboard.isKeyDown(Keyboard.KEY_LEFT)){
                 camera.strafeLeft(movementSpeed);
             }
-            if (Keyboard.isKeyDown(Keyboard.KEY_D)){
+            if (Keyboard.isKeyDown(Keyboard.KEY_D) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)){
                 camera.strafeRight(movementSpeed);
             }
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
@@ -127,10 +150,15 @@ public class FPCamera {
         Display.destroy();
     }
     
+    // Method: Render
+    // Purpose: This method draws the cube for the program.
      private void render(){
         try{
+            
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
+            
             //Top
-            glBegin(GL_QUADS);
+            glBegin(GL_POLYGON);
             glColor3f(1.0f,0.0f,0.0f);
             glVertex3f(1.0f,1.0f,-1.0f);
             glVertex3f(-1.0f,1.0f,-1.0f);
@@ -139,8 +167,8 @@ public class FPCamera {
             glEnd();
             
             //Bottom
-            glBegin(GL_QUADS);
-            glColor3f(0.0f,1.0f,0.0f);
+            glBegin(GL_POLYGON);
+            glColor3f(1.0f,0.0f,1.0f);
             glVertex3f(1.0f,-1.0f,1.0f);
             glVertex3f(-1.0f,-1.0f,1.0f);
             glVertex3f(-1.0f,-1.0f,-1.0f);
@@ -148,7 +176,7 @@ public class FPCamera {
             glEnd();
             
             //Front
-            glBegin(GL_QUADS);
+            glBegin(GL_POLYGON);
             glColor3f(0.0f,0.0f,1.0f);
             glVertex3f(1.0f,1.0f,1.0f);
             glVertex3f(-1.0f,1.0f,1.0f);
@@ -157,7 +185,7 @@ public class FPCamera {
             glEnd();
             
             //Back
-            glBegin(GL_QUADS);
+            glBegin(GL_POLYGON);
             glColor3f(1.0f,1.0f,0.0f);
             glVertex3f(1.0f,-1.0f,-1.0f);
             glVertex3f(-1.0f,-1.0f,-1.0f);
@@ -166,7 +194,7 @@ public class FPCamera {
             glEnd();
             
             //Left
-            glBegin(GL_QUADS);
+            glBegin(GL_POLYGON);
             glColor3f(0.0f,1.0f,1.0f);
             glVertex3f(-1.0f,1.0f,1.0f);
             glVertex3f(-1.0f,1.0f,-1.0f);
@@ -175,7 +203,7 @@ public class FPCamera {
             glEnd();
             
             //Right
-            glBegin(GL_QUADS);
+            glBegin(GL_POLYGON);
             glColor3f(1.0f,1.0f,1.0f);
             glVertex3f(1.0f,1.0f,-1.0f);
             glVertex3f(1.0f,1.0f,1.0f);
