@@ -1,9 +1,7 @@
-/* File: Basic3D.java
-*  Authors: Mark Erickson, Kevin Kuhlman, Karen Cheung
-*  Class: CS 445 Computer Graphics
-*  Assignment: Final Project Checkpoint 1
-*  Date Last Modified: 5/3/2016
-*  Purpose: This program creates a 3D cube with 6 different colored faces.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package CS445FinalProject;
 
@@ -16,7 +14,7 @@ import org.lwjgl.util.glu.GLU;
 public class Basic3D {
 
     private DisplayMode displayMode;
-    private FPCamera fp = new FPCamera(0.0f, 0.0f, 0.0f);
+    private FPCamera fp;
 
     // Method: start
     // Purpose: This method calls the create window and initGL methods to draw the scene.
@@ -24,6 +22,7 @@ public class Basic3D {
         try {
             createWindow();
             initGL();
+            fp = new FPCamera(0.0f, 0.0f, 0.0f);
             fp.gameLoop();
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +41,7 @@ public class Basic3D {
             }
         }
         Display.setDisplayMode(displayMode);
-        Display.setTitle("CS 445 Checkpoint 1");
+        Display.setTitle("CS 445 Checkpoint 2");
         Display.create();
 
     }
@@ -56,6 +55,11 @@ public class Basic3D {
         GLU.gluPerspective(100.0f, (float) displayMode.getWidth() / (float) displayMode.getHeight(), 0.1f, 300.0f);
         glMatrixMode(GL_MODELVIEW);
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_COLOR_ARRAY);
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
+        glEnableClientState (GL_TEXTURE_COORD_ARRAY);
     }
 
     // Method: main

@@ -1,11 +1,8 @@
-/* File: FPCamera.java
-*  Authors: Mark Erickson, Kevin Kuhlman, Karen Cheung
-*  Class: CS 445 Computer Graphics
-*  Assignment: Final Project Checkpoint 1
-*  Date Last Modified: 5/3/2016
-*  Purpose: This program creates a 3D cube with 6 different colored faces.
-*/
-
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package CS445FinalProject;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -23,6 +20,7 @@ public class FPCamera {
     private float yaw = 0.0f;
     private float pitch = 0.0f;
     private Vector3Float me;
+    private Chunk world;
 
     // Method: FPCamera constructor
     // Purpose: This constructor initializes the position vectors to the x,y,z parameters.
@@ -32,6 +30,7 @@ public class FPCamera {
         lPosition.x = 0f;
         lPosition.y = 15f;
         lPosition.z = 0f;
+        world = new Chunk(0,0,0);
     }
 
     // Method: yaw
@@ -142,7 +141,7 @@ public class FPCamera {
             glLoadIdentity();
             camera.lookThrough();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            render();
+            world.render();
             Display.update();
             Display.sync(60);
             
