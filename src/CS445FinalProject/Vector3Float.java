@@ -1,11 +1,14 @@
-/* File: Vector3Float.java
-*  Authors: Mark Erickson, Kevin Kuhlman, Karen Cheung
-*  Class: CS 445 Computer Graphics
-*  Assignment: Final Project Checkpoint 1
-*  Date Last Modified: 5/3/2016
-*  Purpose: This program creates a 3D cube with 6 different colored faces.
-*/
-
+/***************************************************************
+* file: Basic3D.java
+* author: Karen Cheung, Mark Erickson, Kevin Kuhlman
+* class: CS 445 - Computer Graphics
+*
+* assignment: Final Program Checkpoint 2 
+* date last modified: 5/17/2016
+*
+* purpose: This program displays a chunk of cubes with 6 different block types with randomly generated terrain.
+*
+****************************************************************/ 
 package CS445FinalProject;
 
 public class Vector3Float {
