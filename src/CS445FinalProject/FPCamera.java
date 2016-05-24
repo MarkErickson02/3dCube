@@ -111,7 +111,7 @@ public class FPCamera {
     // Method: gameLoop
     // Purpose: This method contains the controls for the camera and calls the render method.
     public void gameLoop(){
-        FPCamera camera = new FPCamera(-50,-55,-45);
+        FPCamera camera = new FPCamera(-30,-59,-30);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f; //Length of the frame.
