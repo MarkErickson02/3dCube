@@ -119,8 +119,10 @@ public class Chunk {
                        Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(1);
                     else if(z==4 && x<4)
                        Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(1);
-                    else
-                       Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(0);
+                    else{
+                        Blocks[(int) (x)][(int) (y)][(int) (z)].SetID(0);
+                    }
+                    
                 }
                 VertexPositionData.put(createCube((float) (startX + x* CUBE_LENGTH),(float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)),(float) (startZ + z *CUBE_LENGTH)));
                 VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
@@ -398,67 +400,67 @@ public class Chunk {
             case 6: // Wood block texture
                 return new float[]{
                     // BOTTOM QUAD(DOWN=+Y)
-                    x + offset * 5, y + offset * 9,
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 4, y + offset * 8,
-                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 2,
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 5, y + offset * 1,
+                    x + offset * 6, y + offset * 1,
                     // TOP!
-                    x + offset * 5, y + offset * 9,
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 4, y + offset * 8,
-                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 2,
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 5, y + offset * 1,
+                    x + offset * 6, y + offset * 1,
                     // FRONT QUAD
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 3, y + offset * 9,
-                    x + offset * 3, y + offset * 8,
-                    x + offset * 4, y + offset * 8,
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 4, y + offset * 2,
+                    x + offset * 4, y + offset * 1,
+                    x + offset * 5, y + offset * 1,
                     // BACK QUAD
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 3, y + offset * 9,
-                    x + offset * 3, y + offset * 8,
-                    x + offset * 4, y + offset * 8,
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 4, y + offset * 2,
+                    x + offset * 4, y + offset * 1,
+                    x + offset * 5, y + offset * 1,
                     // LEFT QUAD
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 3, y + offset * 9,
-                    x + offset * 3, y + offset * 8,
-                    x + offset * 4, y + offset * 8,
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 4, y + offset * 2,
+                    x + offset * 4, y + offset * 1,
+                    x + offset * 5, y + offset * 1,
                     // RIGHT QUAD
-                    x + offset * 4, y + offset * 9,
-                    x + offset * 3, y + offset * 9,
-                    x + offset * 3, y + offset * 8,
-                    x + offset * 4, y + offset * 8};
+                    x + offset * 5, y + offset * 2,
+                    x + offset * 4, y + offset * 2,
+                    x + offset * 4, y + offset * 1,
+                    x + offset * 5, y + offset * 1};
             case 7: // Leaves block texture
                 return new float[]{
                     // BOTTOM QUAD(DOWN=+Y)
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6,
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8,
                     // TOP!
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6,
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8, 
                     // FRONT QUAD
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6,
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8,
                     // BACK QUAD
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6,
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8,
                     // LEFT QUAD
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6, 
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8,
                     // RIGHT QUAD
-                    x + offset * 5, y + offset * 7,
-                    x + offset * 4, y + offset * 7,
-                    x + offset * 4, y + offset * 6,
-                    x + offset * 5, y + offset * 6};
+                    x + offset * 6, y + offset * 9,
+                    x + offset * 5, y + offset * 9,
+                    x + offset * 5, y + offset * 8,
+                    x + offset * 6, y + offset * 8};
 
         }
     }

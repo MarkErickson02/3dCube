@@ -41,7 +41,7 @@ public class Block {
     }
     
     public Block(BlockType type){
-    Type= type;
+       Type = type;
     }
     
     public void setCoords(float x, float y, float z){
