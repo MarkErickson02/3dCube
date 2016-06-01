@@ -19,6 +19,8 @@ import org.lwjgl.opengl.Display;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
+import java.nio.FloatBuffer;
+import org.lwjgl.BufferUtils;
 
 public class FPCamera {
 
@@ -66,6 +68,7 @@ public class FPCamera {
     public void walkBackwards(float distance) {
         float xOffset = distance * (float) Math.sin(Math.toRadians(yaw));
         float zOffset = distance * (float) Math.cos(Math.toRadians(yaw));
+       
         position.x += xOffset;
         position.z -= zOffset;
     }
@@ -106,12 +109,15 @@ public class FPCamera {
         glRotatef(pitch, 1.0f, 0.0f, 0.0f);
         glRotatef(yaw, 0.0f, 1.0f, 0.0f);
         glTranslatef(position.x, position.y, position.z);
+        FloatBuffer lightPosition = BufferUtils.createFloatBuffer(4);
+        lightPosition.put(20.0f).put(50.0f).put(30).put(1.0f).flip();
+        glLight(GL_LIGHT0, GL_POSITION, lightPosition);
     }
     
     // Method: gameLoop
     // Purpose: This method contains the controls for the camera and calls the render method.
     public void gameLoop(){
-        FPCamera camera = new FPCamera(-30,-59,-30);
+        FPCamera camera = new FPCamera(-30,-33,-30);
         float dx = 0.0f;
         float dy = 0.0f;
         float dt = 0.0f; //Length of the frame.

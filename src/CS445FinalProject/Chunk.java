@@ -24,7 +24,7 @@ import org.newdawn.slick.util.ResourceLoader;
 public class Chunk {
     static final int CHUNK_SIZE = 30;
     static final int CUBE_LENGTH = 2;
-    private Block[][][] Blocks;
+    Block[][][] Blocks;
     private int VBOVertexHandle;
     private int VBOColorHandle;
     private int StartX, StartY, StartZ;
@@ -102,6 +102,10 @@ public class Chunk {
         FloatBuffer VertexColorData =
         BufferUtils.createFloatBuffer((CHUNK_SIZE* CHUNK_SIZE *CHUNK_SIZE) * 6 * 12);
         int a = 0;
+        int posX=0, posZ=0, posY=0;
+        posX = r.nextInt(CHUNK_SIZE);
+        posZ = r.nextInt(CHUNK_SIZE);
+        
         for (float x = 0; x < CHUNK_SIZE; x += 1) {
             for (float z = 0; z < CHUNK_SIZE; z += 1) {
                 double height = (startY + (int)(7*(1+noise.getNoise((int)x,(int)z))*CUBE_LENGTH));
@@ -113,20 +117,20 @@ public class Chunk {
                 else if(y < height-1)
                     Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(3);
                 else{
-                    if(x < 4 && z < 4)
-                        Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(2);
-                    else if(x == 4 && z < 4)
+                    if(x >= posX && x<=posX+5 && (z == posZ||z==posZ+5)){
                        Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(1);
-                    else if(z==4 && x<4)
+                    }else if(z >= posZ && z<=posZ+5 && (x == posX||x==posX+5)){
                        Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(1);
-                    else{
-                        Blocks[(int) (x)][(int) (y)][(int) (z)].SetID(0);
+                    }else if(x>=posX+1 && x<=posX+4 && z>=posZ+1 && z<=posZ+4){
+                       Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(2);
+                    }else{
+                       Blocks[(int)(x)][(int) (y)][(int) (z)].SetID(0);
                     }
-                    
                 }
-                VertexPositionData.put(createCube((float) (startX + x* CUBE_LENGTH),(float)(y*CUBE_LENGTH+(int)(CHUNK_SIZE*.8)),(float) (startZ + z *CUBE_LENGTH)));
+                VertexPositionData.put(createCube((float) (startX + x* CUBE_LENGTH),(float)(startY + y*CUBE_LENGTH),(float) (startZ + z *CUBE_LENGTH)));
                 VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) x][(int) y][(int) z])));
                 VertexTextureData.put(createTexCube((float) 0, (float) 0,Blocks[(int)(x)][(int) (y)][(int) (z)]));
+                Blocks[(int)x][(int)y][(int)z].SetActive(true);
                 }
             }
         }
