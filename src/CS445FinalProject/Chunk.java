@@ -134,6 +134,20 @@ public class Chunk {
                 }
             }
         }
+         for (int j = 0; j < r.nextInt(15); j++) {
+             int treeX = r.nextInt(30);
+             int treeZ = r.nextInt(30);
+             float treeY = (startY + (int) (7 * (1 + noise.getNoise((int) treeX, (int) treeZ)) * CUBE_LENGTH));
+             for (int i = 0; i < r.nextInt(15); i++) {
+                 Blocks[(int) (treeX)][(int) (treeY)][(int) (treeZ)].SetID(6);
+                 VertexPositionData.put(createCube((float) (startX + treeX * CUBE_LENGTH), (float) (startY + treeY * CUBE_LENGTH), (float) (startZ + treeZ * CUBE_LENGTH)));
+                 VertexColorData.put(createCubeVertexCol(getCubeColor(Blocks[(int) treeX][(int) treeY][(int) treeZ])));
+                 VertexTextureData.put(createTexCube((float) 0, (float) 0, Blocks[(int) (treeX)][(int) (treeY)][(int) (treeZ)]));
+                 Blocks[(int) treeX][(int) treeY][(int) treeZ].SetActive(true);
+                 treeY++;
+             }
+
+         }
         VertexTextureData.flip();
         VertexColorData.flip();
         VertexPositionData.flip();
